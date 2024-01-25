@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Search your favorite Quote";
+}
+
+<h4>Search for a Quote</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ShowSearchResults">
+            <h4>Search by quotation</h4>
+            <div class="form-group" name="Search quotation">
+                <label for="SearchTermQuotation" class="control-label"></label>
+                <input name="SearchTermQuotation" class="form-control" />
+            </div>
+            <br>
+            <h4>Search by author</h4>
+            <div class="form-group" name="Search author">
+                <label for="SearchTermAuthor" class="control-label"></label>
+                <input name="SearchTermAuthor" class="form-control" />
+            </div>
+            <br>
+            <h4>Search by genre</h4>
+            <div class="form-group" name="Search genre">
+                <label for="SearchTermGenre" class="control-label"></label>
+                <input name="SearchTermGenre" class="form-control" />
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+                <input type="submit" asp-action="Index" value="Back to List" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>

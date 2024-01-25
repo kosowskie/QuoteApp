@@ -1,0 +1,71 @@
+﻿@using System.Security.Claims
+@model IEnumerable<QuoteApp.Models.Quote>
+
+@{
+    ViewData["Title"] = "Available Quote";
+}
+
+<h4>Here is a list of available Quotes</h4>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.ActionLink("Quotation", "Index", new { sortOrder = ViewBag.SortParam, searchString = "quotation" })
+            </th>
+            <th>
+                @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.SortParam, searchString = "author" })
+            </th>
+            <th>
+                @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.SortParam, searchString = "genre" })
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @{
+            int counter = 1;
+        }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @counter
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quotation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @if (item.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier) || string.IsNullOrEmpty(item.UserId))
+                    {
+                        <text>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                        </text>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+            counter++;
+        }
+    </tbody>
+</table>
+
+<br>
+<form asp-action="Create">
+    <input type="submit" value="Create New" class="btn btn-primary" />
+</form>
+
